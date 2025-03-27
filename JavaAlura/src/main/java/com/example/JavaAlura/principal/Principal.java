@@ -3,11 +3,14 @@ package com.example.JavaAlura.principal;
 import com.example.JavaAlura.Model.DadosEpisodio;
 import com.example.JavaAlura.Model.DadosSerie;
 import com.example.JavaAlura.Model.DadosTemporada;
+import com.example.JavaAlura.Model.Episodio;
 import com.example.JavaAlura.Service.ConsumoApi;
 import com.example.JavaAlura.Service.ConverteDados;
 
 import java.util.*;
 import java.util.stream.Collectors;
+
+
 
 public class Principal {
 
@@ -49,10 +52,13 @@ public class Principal {
 
         System.out.println("\n top 5 episodios");
         dadosEpisodios.stream()
-                .filter(e -> !e.availacao().equalsIgnoreCase("N/A"))
-                .sorted(Comparator.comparing(DadosEpisodio::availacao).reversed())
+                .filter(e -> !e.avalaicao().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DadosEpisodio::avalaicao).reversed())
                 .limit(5)
                 .forEach(System.out::println);
+
+
+
     }
 }
 
