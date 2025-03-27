@@ -1,5 +1,6 @@
 package com.example.JavaAlura.Model;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 
 public class Episodio {
@@ -13,8 +14,17 @@ public class Episodio {
         this.temporada = numeroTemporada;
         this.titulo = dadosEpisodio.titulo();
         this.numeroEpisodio = dadosEpisodio.numero();
-        this.avaliacao = Double.valueOf(dadosEpisodio.avalaicao());
-        this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
+
+        try{
+            this.avaliacao = Double.valueOf(dadosEpisodio.avalaicao());
+        } catch (NumberFormatException ex){
+            this.avaliacao = 0.0;
+        }
+        try{
+            this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
+        } catch (DateTimeException ex) {
+            this.dataLancamento = null;
+        }
     }
 
     public Integer getTemporada() {
