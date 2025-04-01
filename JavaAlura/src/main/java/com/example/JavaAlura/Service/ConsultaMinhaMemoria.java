@@ -1,12 +1,12 @@
 package com.example.JavaAlura.Service;
 
-import com.example.JavaAlura.Service.traducao.DadosTraducao;
+import com.example.JavaAlura.Service.traducao.TraducaoDados;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.net.URLEncoder;
 
-public class ConsultaMyMemory {
+public class ConsultaMinhaMemoria {
     public static String obterTraducao(String text) {
         ObjectMapper mapper = new ObjectMapper();
 
@@ -19,13 +19,13 @@ public class ConsultaMyMemory {
 
         String json = consumo.obterDados(url);
 
-        DadosTraducao traducao;
+        TraducaoDados traducao;
         try {
-            traducao = mapper.readValue(json, DadosTraducao.class);
+            traducao = mapper.readValue(json, TraducaoDados.class);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
 
-        return traducao.dadosResposta().textoTraduzido();
+        return traducao.respostaDados().textoTraduzido();
     }
 }
