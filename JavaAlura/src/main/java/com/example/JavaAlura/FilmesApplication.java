@@ -15,7 +15,7 @@ public class FilmesApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) {
         Principal principal = new Principal();
-        principal.exibMenu();
+        principal.exibeMenu();
 
 	}
 }
