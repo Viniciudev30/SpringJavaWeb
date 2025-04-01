@@ -1,7 +1,6 @@
 package com.example.JavaAlura.Model;
 
-import com.example.JavaAlura.Service.consultaChatGPT;
-import com.fasterxml.jackson.annotation.JsonAlias;
+import com.example.JavaAlura.Service.ConsultaMyMemory;
 
 import java.util.OptionalDouble;
 
@@ -21,7 +20,7 @@ public class Serie {
         this.genero = Categoria.fromString(dadosSerie.genero().split(",")[0].trim());
         this.atores = dadosSerie.atores();
         this.poster = dadosSerie.poster();
-        this.sinopse = consultaChatGPT.obterTraducao(dadosSerie.sinopse().trim());
+        this.sinopse = ConsultaMyMemory.obterTraducao(dadosSerie.sinopse().trim());
     }
 
     public String getTitulo() {
