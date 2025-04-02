@@ -3,6 +3,9 @@ package com.example.JavaAlura.principal;
 import com.example.JavaAlura.Model.*;
 import com.example.JavaAlura.Service.ConsumoApi;
 import com.example.JavaAlura.Service.ConverteDados;
+import com.example.JavaAlura.repository.SerieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -15,6 +18,13 @@ public class Principal {
     private final String ENDERECO = "https://www.omdbapi.com/?t=";
     private final String API_KEY = "&apikey=18bacbdb";
     private List<DadosSerie> dadosSeries = new ArrayList<>();
+
+    private SerieRepository repositorio;
+
+    public Principal(SerieRepository repositorio) {
+        this.repositorio = repositorio;
+    }
+
     public void exibeMenu() {
         var opcao = -1;
         while(opcao != 0) {
@@ -51,7 +61,9 @@ public class Principal {
 
     private void buscarSerieWeb() {
         DadosSerie dados = getDadosSerie();
-        dadosSeries.add(dados);
+        Serie serie = new Serie(dados);
+    //   dadosSeries.add(dados);
+        repositorio.save(serie);
         System.out.println(dados);
     }
 
@@ -77,10 +89,7 @@ public class Principal {
 
     private void listarSeriesbuscadas(){
 
-        List<Serie> series = new ArrayList<>();
-        series = dadosSeries.stream()
-                .map(d -> new Serie(d))
-                .collect(Collectors.toList());
+        List<Serie> series = repositorio.findAll();
         series.stream()
                 .sorted(Comparator.comparing(Serie::getGenero))
                 .forEach(System.out::println);
