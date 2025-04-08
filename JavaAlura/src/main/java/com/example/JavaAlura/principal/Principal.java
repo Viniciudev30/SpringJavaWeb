@@ -163,8 +163,10 @@ public class Principal {
     private void buscarSeriePorCategoria(){
         System.out.println("Deseja buscar series de que categoria/genero");
         var nomeGenero = leitura.nextLine();
-
+        Categoria categoria = Categoria.fromPortugues(nomeGenero);
         List<Serie> seriesPorCategoria = repositorio.findByGenero(categoria);
+        System.out.println("Series da categoria" + nomeGenero);
+        seriesPorCategoria.forEach(System.out::println);
     }
 
 }
